@@ -1,0 +1,3 @@
+## build the docker code 
+## push the dockerimage to socker hub 
+## ssh itno our vm and start the new image
