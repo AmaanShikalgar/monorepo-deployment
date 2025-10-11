@@ -5,18 +5,14 @@ WORKDIR /usr/src/app
 COPY ./packages ./packages
 COPY ./bun.lock ./bun.lock
 
-COPY package.json ./package.json
-COPY turbo.json ./turbo.json
+COPY ./package.json ./package.json
+COPY ./turbo.json ./turbo.json
 
-COPY ./apps/backend ./apps/backend
-
-RUN bun install
-RUN bun run db:migrate
-
-COPY . .
+COPY ./apps/websocket ./apps/websocket
 
 RUN bun install
+RUN bun run db:generate
 
-EXPOSE 8080
+EXPOSE 8081
 
 CMD ["bun", "run", "start:websocket"]
