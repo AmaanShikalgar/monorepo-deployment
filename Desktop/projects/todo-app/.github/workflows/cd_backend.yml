@@ -28,7 +28,7 @@ jobs:
           push: true
           tags: amaxn007/todo-app-backend:${{ github.sha }}
 
-          ## step to deploy this to vm
+          ## step to deploy this to vm after above step is done
 
       - name: SSH and deploy to VM
         uses: appleboy/ssh-action@v0.1.6
