@@ -1,0 +1,33 @@
+## build the docker code 
+## push the dockerimage to socker hub 
+## ssh itno our vm and start the new image
+
+name: Deploy the backend
+on: 
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code # checkout the code from github
+        uses: actions/checkout@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2 #docker login
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    
+      - name: Build and push Docker image # docker build and push to docker hub
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./docker/dockerfile.backend
+          push: true
+          tags: amaxn007/todo-app-backend:${{ github.sha }}
+
+          ## step to deploy this to vm after above step is done
+
+     
